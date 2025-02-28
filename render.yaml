@@ -1,0 +1,24 @@
+# render.yaml for hritik661/Hritik_TradingApp
+services:
+  # Frontend: React app
+  - type: web
+    name: trading-app-frontend
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: build
+    branch: master  # Change to 'main' if your branch is 'main'
+    autoDeploy: true
+
+  # Backend: Python app
+  - type: web
+    name: trading-app-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py  # Adjust to your backend command
+    branch: master  # Change to 'main' if your branch is 'main'
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.9"  # Adjust to your Python version
