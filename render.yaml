@@ -1,14 +1,15 @@
 services:
   # Frontend: React app (Static Site)
-  - type: static  # Corrected from 'web' to 'static' for React
+  - type: web
     name: trading-app-frontend
+    runtime: static
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: build
-    branch: main  # Adjusted to 'main' (common default; change if yours is 'master')
+    branch: main  # Use 'master' if your branch is 'master'
     autoDeploy: true
-    plan: free  # Explicitly set to free tier
-    region: oregon  # Free tier region
+    plan: free
+    region: oregon
 
   # Backend: Python app (Web Service)
   - type: web
@@ -16,11 +17,11 @@ services:
     runtime: python
     rootDir: backend
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app  # Updated to use Gunicorn for production
-    branch: main  # Adjusted to 'main' (change if yours is 'master')
+    startCommand: gunicorn app:app
+    branch: main  # Use 'master' if your branch is 'master'
     autoDeploy: true
-    plan: free  # Explicitly set to free tier
-    region: oregon  # Free tier region
+    plan: free
+    region: oregon
     envVars:
       - key: PYTHON_VERSION
-        value: "3.9"  # Matches your specification
+        value: "3.9"
