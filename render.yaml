@@ -1,24 +1,26 @@
-# render.yaml for hritik661/Hritik_TradingApp
 services:
-  # Frontend: React app
-  - type: web
+  # Frontend: React app (Static Site)
+  - type: static  # Corrected from 'web' to 'static' for React
     name: trading-app-frontend
-    runtime: static
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: build
-    branch: master  # Change to 'main' if your branch is 'main'
+    branch: main  # Adjusted to 'main' (common default; change if yours is 'master')
     autoDeploy: true
+    plan: free  # Explicitly set to free tier
+    region: oregon  # Free tier region
 
-  # Backend: Python app
+  # Backend: Python app (Web Service)
   - type: web
     name: trading-app-backend
     runtime: python
     rootDir: backend
     buildCommand: pip install -r requirements.txt
-    startCommand: python app.py  # Adjust to your backend command
-    branch: master  # Change to 'main' if your branch is 'main'
+    startCommand: gunicorn app:app  # Updated to use Gunicorn for production
+    branch: main  # Adjusted to 'main' (change if yours is 'master')
     autoDeploy: true
+    plan: free  # Explicitly set to free tier
+    region: oregon  # Free tier region
     envVars:
       - key: PYTHON_VERSION
-        value: "3.9"  # Adjust to your Python version
+        value: "3.9"  # Matches your specification
